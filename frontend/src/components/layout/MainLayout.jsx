@@ -8,7 +8,7 @@ export default function MainLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       {/* Sidebar Navigation */}
       <Sidebar 
         isOpen={isSidebarOpen} 
@@ -26,10 +26,10 @@ export default function MainLayout() {
         </main>
 
         {/* Global Footer */}
-        <footer className="mt-auto border-t border-slate-800/80 bg-slate-900/60 py-4 px-6 text-xs text-slate-400">
+        <footer className="mt-auto border-t border-slate-200 bg-white/80 py-4 px-6 text-xs text-slate-500">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <ShieldCheck className="w-4 h-4 text-blue-600" />
               <span>
                 <strong>PrivaLearn AI</strong> — Privacy-Preserving Student Risk Intelligence with Differential Privacy (DP-SGD).
               </span>

@@ -25,20 +25,20 @@ export const ToastProvider = ({ children }) => {
       {/* Toast Notification Container */}
       <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none max-w-sm w-full">
         {toasts.map((toast) => {
-          let bg = 'bg-slate-900 border-slate-700 text-slate-100';
+          let bg = 'bg-white border-slate-700 text-slate-900';
           let Icon = Info;
-          let iconColor = 'text-cyan-400';
+          let iconColor = 'text-blue-600';
 
           if (toast.type === 'success') {
-            bg = 'bg-slate-900/95 border-emerald-500/30 text-emerald-100 shadow-lg shadow-emerald-950/40';
+            bg = 'bg-white/95 border-emerald-500/30 text-emerald-100 shadow-lg shadow-emerald-950/40';
             Icon = CheckCircle2;
             iconColor = 'text-emerald-400';
           } else if (toast.type === 'error') {
-            bg = 'bg-slate-900/95 border-rose-500/30 text-rose-100 shadow-lg shadow-rose-950/40';
+            bg = 'bg-white/95 border-rose-500/30 text-rose-100 shadow-lg shadow-rose-950/40';
             Icon = XCircle;
             iconColor = 'text-rose-400';
           } else if (toast.type === 'warning') {
-            bg = 'bg-slate-900/95 border-amber-500/30 text-amber-100 shadow-lg shadow-amber-950/40';
+            bg = 'bg-white/95 border-amber-500/30 text-amber-100 shadow-lg shadow-amber-950/40';
             Icon = AlertTriangle;
             iconColor = 'text-amber-400';
           }
@@ -52,7 +52,7 @@ export const ToastProvider = ({ children }) => {
               <div className="text-sm font-medium leading-snug flex-1">{toast.message}</div>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="text-slate-400 hover:text-white p-0.5 rounded-md transition-colors"
+                className="text-slate-500 hover:text-white p-0.5 rounded-md transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>

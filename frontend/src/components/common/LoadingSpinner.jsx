@@ -12,7 +12,7 @@ export default function LoadingSpinner({ text = 'Loading data...', size = 'defau
       <div 
         className={`${sizeClasses[size] || sizeClasses.default} border-cyan-500/20 border-t-cyan-400 rounded-full animate-spin`}
       />
-      {text && <p className="text-xs text-slate-400 font-mono tracking-wide">{text}</p>}
+      {text && <p className="text-xs text-slate-500 font-mono tracking-wide">{text}</p>}
     </div>
   );
 }
