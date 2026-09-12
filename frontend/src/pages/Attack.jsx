@@ -120,7 +120,7 @@ export default function Attack() {
           {terminalLogs.map((log, i) => (
             <div key={i} className={`mb-1 ${log.includes('CRITICAL') || log.includes('DENIED') ? 'text-rose-400 font-bold' : 'text-slate-300'}`}>
               <span className="text-slate-500 mr-2">[{new Date().toISOString().split('T')[1].slice(0,8)}]</span>
-              > {log}
+              &gt; {log}
             </div>
           ))}
           {attackComplete && (
