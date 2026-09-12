@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, 
   ShieldCheck, 
@@ -30,18 +30,30 @@ export default function Prediction() {
     }));
   };
 
-  const handleCalculate = async (e) => {
-    e.preventDefault();
+  const calculateRisk = async () => {
     try {
       setIsCalculating(true);
       const res = await predictionAPI.predictRisk(formData);
       setResult(res.data);
-      addToast('Student risk predicted successfully via API service.', 'success');
+      // We removed the toast here so it doesn't spam the user on every slider movement!
     } catch (err) {
-      addToast(err.message || 'Failed to compute prediction via API service.', 'error');
+      console.error('Failed to compute prediction via API service.', err);
     } finally {
       setIsCalculating(false);
     }
+  };
+
+  // Real-time "What-If" Simulator: Automatically run prediction when sliders move (debounced)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      calculateRisk();
+    }, 300); // 300ms debounce
+    return () => clearTimeout(timer);
+  }, [formData]);
+
+  const handleCalculate = (e) => {
+    e.preventDefault();
+    calculateRisk();
   };
 
   const loadPreset = (presetType) => {

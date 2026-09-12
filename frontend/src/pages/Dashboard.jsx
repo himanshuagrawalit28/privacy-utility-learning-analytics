@@ -36,6 +36,15 @@ export default function Dashboard() {
   const [tradeoffData, setTradeoffData] = useState([]);
   const [recentStudents, setRecentStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeEpsilonIndex, setActiveEpsilonIndex] = useState(3); // Default to index 3 (ε=1.2)
+
+  const dynamicMetrics = metrics && tradeoffData.length > 0 ? {
+    ...metrics,
+    modelAccuracy: tradeoffData[activeEpsilonIndex].accuracy,
+    privacyScore: tradeoffData[activeEpsilonIndex].privacyScore,
+    attackSuccessRate: tradeoffData[activeEpsilonIndex].attackSuccess,
+    epsilonBudget: tradeoffData[activeEpsilonIndex].epsilon,
+  } : metrics;
 
   useEffect(() => {
     async function loadDashboardData() {
@@ -81,7 +90,7 @@ export default function Dashboard() {
               Model Safety & Student Risk Overview
             </h1>
             <p className="text-slate-400 text-sm mt-1 max-w-2xl">
-              Real-time monitoring of differential privacy guarantees (ε = {metrics.epsilonBudget}, δ = {metrics.deltaBudget}) protecting {metrics.totalStudents} enrolled students while predicting academic risk with {metrics.modelAccuracy}% retained accuracy.
+              Real-time monitoring of differential privacy guarantees (ε = {dynamicMetrics.epsilonBudget}, δ = {dynamicMetrics.deltaBudget}) protecting {dynamicMetrics.totalStudents} enrolled students while predicting academic risk with {dynamicMetrics.modelAccuracy}% retained accuracy.
             </p>
           </div>
 
@@ -115,12 +124,12 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-display text-white">{metrics.modelAccuracy}%</span>
-            <span className="text-xs text-slate-400">vs {metrics.modelAccuracyBaseline}% baseline</span>
+            <span className="text-3xl font-bold font-display text-white">{dynamicMetrics.modelAccuracy}%</span>
+            <span className="text-xs text-slate-400">vs {dynamicMetrics.modelAccuracyBaseline}% baseline</span>
           </div>
           <div className="mt-3 flex items-center gap-1.5 text-xs text-amber-400">
             <Info className="w-3.5 h-3.5 shrink-0" />
-            <span>Only -{(metrics.modelAccuracyBaseline - metrics.modelAccuracy).toFixed(1)}% utility tradeoff for privacy</span>
+            <span>Only -{(dynamicMetrics.modelAccuracyBaseline - dynamicMetrics.modelAccuracy).toFixed(1)}% utility tradeoff for privacy</span>
           </div>
         </div>
 
@@ -133,7 +142,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-display text-blue-300">{metrics.privacyScore}</span>
+            <span className="text-3xl font-bold font-display text-blue-300">{dynamicMetrics.privacyScore}</span>
             <span className="text-xs text-slate-400">/ 100</span>
           </div>
           <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-400">
@@ -151,28 +160,45 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-display text-emerald-400">{metrics.attackSuccessRate}%</span>
-            <span className="text-xs text-slate-400 line-through">{metrics.attackSuccessBaseline}%</span>
+            <span className="text-3xl font-bold font-display text-emerald-400">{dynamicMetrics.attackSuccessRate}%</span>
+            <span className="text-xs text-slate-400 line-through">{dynamicMetrics.attackSuccessBaseline}%</span>
           </div>
           <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-400 font-mono">
             <span>Near random guess baseline (50%)</span>
           </div>
         </div>
 
-        {/* KPI 4: Privacy Budget (ε) */}
-        <div className="glass-card glass-card-hover rounded-2xl p-5 border border-slate-800">
-          <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Privacy Budget (ε)</span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
-              <Lock className="w-4 h-4" />
+        {/* KPI 4: Privacy Budget (ε) - INTERACTIVE */}
+        <div className="glass-card glass-card-hover rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between text-slate-400 mb-2">
+              <span className="text-xs font-semibold uppercase tracking-wider">Privacy Budget (ε)</span>
+              <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                <Lock className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold font-display text-white font-mono">{dynamicMetrics.epsilonBudget}</span>
+              <span className="text-xs text-slate-400 font-mono">δ = {dynamicMetrics.deltaBudget}</span>
             </div>
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-display text-white font-mono">{metrics.epsilonBudget}</span>
-            <span className="text-xs text-slate-400 font-mono">δ = {metrics.deltaBudget}</span>
-          </div>
-          <div className="mt-3 flex items-center gap-1.5 text-xs text-blue-400">
-            <span>Tight DP bounds applied</span>
+          
+          <div className="mt-4 pt-3 border-t border-slate-800/80">
+            <div className="flex justify-between text-[10px] text-slate-500 mb-1 font-mono">
+              <span>Strict (0.2)</span>
+              <span>None (12.0)</span>
+            </div>
+            <input 
+              type="range" 
+              min="0" 
+              max={tradeoffData.length > 0 ? tradeoffData.length - 1 : 7} 
+              value={activeEpsilonIndex}
+              onChange={(e) => setActiveEpsilonIndex(parseInt(e.target.value))}
+              className="w-full accent-blue-500 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer"
+            />
+            <div className="mt-2 text-center text-[10px] text-blue-400 font-medium bg-blue-500/10 py-1 rounded">
+              Interactive DP Epsilon Adjuster
+            </div>
           </div>
         </div>
       </div>
@@ -248,7 +274,7 @@ export default function Dashboard() {
           <div>
             <div className="flex items-center justify-between mb-1">
               <h2 className="text-base font-bold text-white">Student Risk Profile</h2>
-              <span className="text-xs font-mono text-slate-400">Total: {metrics.totalStudents}</span>
+              <span className="text-xs font-mono text-slate-400">Total: {dynamicMetrics.totalStudents}</span>
             </div>
             <p className="text-xs text-slate-400">Predicted retention risk across university population</p>
           </div>
@@ -257,7 +283,7 @@ export default function Dashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={metrics.riskDistribution}
+                  data={dynamicMetrics.riskDistribution}
                   cx="50%"
                   cy="50%"
                   innerRadius={55}
@@ -265,7 +291,7 @@ export default function Dashboard() {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {metrics.riskDistribution.map((entry, index) => (
+                  {dynamicMetrics.riskDistribution.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
@@ -278,7 +304,7 @@ export default function Dashboard() {
 
           {/* Legend */}
           <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800/80 text-center">
-            {metrics.riskDistribution.map((item) => (
+            {dynamicMetrics.riskDistribution.map((item) => (
               <div key={item.name} className="flex flex-col">
                 <span className="text-[11px] text-slate-400">{item.name}</span>
                 <span className="text-sm font-bold font-display" style={{ color: item.color }}>
@@ -304,7 +330,7 @@ export default function Dashboard() {
 
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={metrics.departmentBreakdown} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <BarChart data={dynamicMetrics.departmentBreakdown} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                 <XAxis dataKey="department" stroke="#64748b" fontSize={10} tickFormatter={(val) => val.split(' ')[0]} />
                 <YAxis stroke="#64748b" fontSize={11} />

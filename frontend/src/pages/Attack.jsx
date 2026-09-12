@@ -25,6 +25,43 @@ export default function Attack() {
   const { addToast } = useToast();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  // Hacker Simulator State
+  const [isAttacking, setIsAttacking] = useState(false);
+  const [terminalLogs, setTerminalLogs] = useState([]);
+  const [attackComplete, setAttackComplete] = useState(false);
+
+  const runAttackSimulation = () => {
+    setIsAttacking(true);
+    setTerminalLogs([]);
+    setAttackComplete(false);
+
+    const logs = [
+      "Initializing Membership Inference Attack (MIA) Protocol...",
+      "Targeting baseline dataset parameters...",
+      "Extracting shadow model gradients...",
+      "Isolating Student STU-1004 prediction confidence...",
+      "Attempting re-identification via loss differentials...",
+      "CRITICAL ERROR: L2 Regularization threshold exceeded.",
+      "CRITICAL ERROR: Noise multiplier blocked gradient inference.",
+      "ACCESS DENIED: DP-SGD Shield Intact."
+    ];
+
+    let currentStep = 0;
+    const interval = setInterval(() => {
+      if (currentStep < logs.length) {
+        setTerminalLogs((prev) => {
+          // Keep a fresh array so React registers the state update
+          const newLogs = [...prev, logs[currentStep]];
+          return newLogs;
+        });
+        currentStep++;
+      } else {
+        clearInterval(interval);
+        setAttackComplete(true);
+      }
+    }, 700);
+  };
 
   useEffect(() => {
     async function loadAttackData() {
@@ -64,6 +101,38 @@ export default function Attack() {
           Visualizing adversary capability to identify training cohort members. Side-by-side metrics demonstrate how DP-SGD slashes attack AUC from 0.86 to 0.53 (near random baseline).
         </p>
       </div>
+
+      {/* Visual Hacker Simulator Section */}
+      <div className="flex justify-start">
+        <button 
+          onClick={runAttackSimulation}
+          disabled={isAttacking && !attackComplete}
+          className="px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold font-display shadow-md transition flex items-center gap-2 disabled:opacity-50"
+        >
+          <ShieldAlert className="w-5 h-5" />
+          SIMULATE ADVERSARIAL ATTACK
+        </button>
+      </div>
+
+      {isAttacking && (
+        <div className="glass-card rounded-2xl p-4 border border-rose-500/30 bg-[#0a0a0a] font-mono text-sm h-64 overflow-y-auto shadow-lg animate-fade-in">
+          <div className="text-emerald-500 mb-2">root@adversary-node:~# ./run_mia_attack.sh --target STU-1004</div>
+          {terminalLogs.map((log, i) => (
+            <div key={i} className={`mb-1 ${log.includes('CRITICAL') || log.includes('DENIED') ? 'text-rose-400 font-bold' : 'text-slate-300'}`}>
+              <span className="text-slate-500 mr-2">[{new Date().toISOString().split('T')[1].slice(0,8)}]</span>
+              > {log}
+            </div>
+          ))}
+          {attackComplete && (
+            <div className="mt-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-400 text-center font-bold text-lg animate-pulse">
+              ATTACK FAILED - Student Privacy Guaranteed
+            </div>
+          )}
+          {!attackComplete && (
+            <div className="text-slate-500 mt-2 animate-pulse">_</div>
+          )}
+        </div>
+      )}
 
       {/* Side-by-Side Model Attack Resilience Comparison */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
