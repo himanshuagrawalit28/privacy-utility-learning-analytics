@@ -148,6 +148,46 @@ export const studentsAPI = {
 
 export const predictionAPI = {
   predictRisk: async (features) => {
+    if (FORCE_MOCK) {
+      await delay(200);
+      
+      // Dynamic What-If Risk Calculation based on UI sliders
+      const { attendance, midtermScore, enableDP, epsilon } = features;
+      const att = parseInt(attendance) / 100;
+      const mid = parseInt(midtermScore) / 100;
+      
+      // Calculate base risk (0 to 1, higher is worse)
+      let rawScore = 1.0 - ((att * 0.6) + (mid * 0.4));
+      
+      let noiseApplied = 0;
+      let privacyGuarantee = 'None (Vulnerable)';
+      
+      if (enableDP) {
+          // Generate DP noise inverse to epsilon budget
+          const noiseMagnitude = 0.08 / parseFloat(epsilon);
+          noiseApplied = (Math.random() * noiseMagnitude * 2) - noiseMagnitude;
+          privacyGuarantee = `ε = ${epsilon}, δ = 1e-5`;
+      }
+      
+      // Apply noise and clamp between 0.05 and 0.95
+      let finalRiskScore = rawScore + noiseApplied;
+      finalRiskScore = Math.max(0.05, Math.min(0.95, finalRiskScore));
+      
+      let predictedRisk = 'Low';
+      if (finalRiskScore > 0.65) predictedRisk = 'High';
+      else if (finalRiskScore > 0.35) predictedRisk = 'Medium';
+      
+      return {
+        data: {
+          predictedRisk,
+          riskScore: finalRiskScore,
+          rawScore: rawScore,
+          noiseApplied,
+          privacyGuarantee
+        }
+      };
+    }
+
     // ALWAYS send predictions to the real Python ML-Service!
     const res = await apiClient.post('/predict', features);
     return res.data;

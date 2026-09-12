@@ -51,9 +51,9 @@ export default function Attack() {
     const interval = setInterval(() => {
       if (currentStep < logs.length) {
         setTerminalLogs((prev) => {
-          // Keep a fresh array so React registers the state update
-          const newLogs = [...prev, logs[currentStep]];
-          return newLogs;
+          // Prevent any chance of undefined logs crashing React
+          if (!logs[currentStep]) return prev;
+          return [...prev, logs[currentStep]];
         });
         currentStep++;
       } else {
@@ -117,12 +117,15 @@ export default function Attack() {
       {isAttacking && (
         <div className="glass-card rounded-2xl p-4 border border-rose-500/30 bg-[#0a0a0a] font-mono text-sm h-64 overflow-y-auto shadow-lg animate-fade-in">
           <div className="text-emerald-500 mb-2">root@adversary-node:~# ./run_mia_attack.sh --target STU-1004</div>
-          {terminalLogs.map((log, i) => (
-            <div key={i} className={`mb-1 ${log.includes('CRITICAL') || log.includes('DENIED') ? 'text-rose-400 font-bold' : 'text-slate-300'}`}>
-              <span className="text-slate-500 mr-2">[{new Date().toISOString().split('T')[1].slice(0,8)}]</span>
-              &gt; {log}
-            </div>
-          ))}
+          {terminalLogs.map((log, i) => {
+            if (!log) return null;
+            return (
+              <div key={i} className={`mb-1 ${log.includes('CRITICAL') || log.includes('DENIED') ? 'text-rose-400 font-bold' : 'text-slate-300'}`}>
+                <span className="text-slate-500 mr-2">[{new Date().toISOString().split('T')[1].slice(0,8)}]</span>
+                &gt; {log}
+              </div>
+            );
+          })}
           {attackComplete && (
             <div className="mt-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded text-emerald-400 text-center font-bold text-lg animate-pulse">
               ATTACK FAILED - Student Privacy Guaranteed
