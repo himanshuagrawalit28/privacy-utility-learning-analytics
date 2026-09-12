@@ -10,7 +10,7 @@ import {
 // API Client Configuration
 const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || 'http://localhost:5000/api';
 // Default to mock mode if backend is not running or explicitly set
-const FORCE_MOCK = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_USE_MOCK === 'false') ? false : true;
+const FORCE_MOCK = false;
 
 // Safe storage helper for SSR / test environments
 const storage = {
