@@ -68,7 +68,7 @@ export default function Attack() {
       {/* Side-by-Side Model Attack Resilience Comparison */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Normal Model Under Attack */}
-        <div className="glass-card rounded-2xl p-6 border border-rose-500/20 shadow-card flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 border border-rose-500/20 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -107,14 +107,14 @@ export default function Attack() {
         </div>
 
         {/* Protected Model Under Attack */}
-        <div className="glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-card flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 border border-slate-700 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
                 <span className="badge-privacy">Protected Model (DP-SGD)</span>
                 <h2 className="text-lg font-bold text-white mt-1">Negligible MIA Vulnerability</h2>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
                 <ShieldCheck className="w-5 h-5" />
               </div>
             </div>
@@ -130,7 +130,7 @@ export default function Attack() {
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-slate-400">Leakage Reduction:</span>
-                <span className="font-mono text-cyan-300 font-bold">{data.stats.leakageReductionPercent}</span>
+                <span className="font-mono text-blue-300 font-bold">{data.stats.leakageReductionPercent}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-slate-400">Student Re-identification:</span>
@@ -139,8 +139,8 @@ export default function Attack() {
             </div>
           </div>
 
-          <div className="mt-5 p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-cyan-200 text-xs flex items-start gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-cyan-400 mt-0.5" />
+          <div className="mt-5 p-3 rounded-xl bg-cyan-950/30 border border-slate-700 text-cyan-200 text-xs flex items-start gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-blue-400 mt-0.5" />
             <span>Differential privacy noise ensures member outputs are indistinguishable from non-members.</span>
           </div>
         </div>

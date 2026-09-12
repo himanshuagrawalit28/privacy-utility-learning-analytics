@@ -70,10 +70,10 @@ export default function Dashboard() {
     <div className="space-y-6 animate-fade-in">
       {/* Top Welcome Banner */}
       <div className="glass-card rounded-2xl p-6 border border-slate-800 relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-96 h-full bg-gradient-to-l from-cyan-500/10 via-indigo-500/5 to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 w-96 h-full bg-gradient-to-l from-blue-600/10 via-indigo-500/5 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
               <Shield className="w-4 h-4" />
               <span>Differential Privacy Production Engine</span>
             </div>
@@ -88,7 +88,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               to="/prediction"
-              className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-sm shadow-glow-cyan transition flex items-center gap-2"
+              className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-sm shadow-none transition flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4" />
               <span>Predict Student Risk</span>
@@ -110,7 +110,7 @@ export default function Dashboard() {
         <div className="glass-card glass-card-hover rounded-2xl p-5 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Model Accuracy</span>
-            <div className="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-slate-800 text-indigo-400 flex items-center justify-center">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
@@ -128,12 +128,12 @@ export default function Dashboard() {
         <div className="glass-card glass-card-hover rounded-2xl p-5 border border-slate-800">
           <div className="flex items-center justify-between text-slate-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Privacy Score</span>
-            <div className="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
               <Shield className="w-4 h-4" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold font-display text-cyan-300">{metrics.privacyScore}</span>
+            <span className="text-3xl font-bold font-display text-blue-300">{metrics.privacyScore}</span>
             <span className="text-xs text-slate-400">/ 100</span>
           </div>
           <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-400">
@@ -171,7 +171,7 @@ export default function Dashboard() {
             <span className="text-3xl font-bold font-display text-white font-mono">{metrics.epsilonBudget}</span>
             <span className="text-xs text-slate-400 font-mono">δ = {metrics.deltaBudget}</span>
           </div>
-          <div className="mt-3 flex items-center gap-1.5 text-xs text-cyan-400">
+          <div className="mt-3 flex items-center gap-1.5 text-xs text-blue-400">
             <span>Tight DP bounds applied</span>
           </div>
         </div>
@@ -193,7 +193,7 @@ export default function Dashboard() {
             </div>
             <Link 
               to="/analytics" 
-              className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-medium transition"
+              className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 font-medium transition"
             >
               <span>Explore full frontier</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -325,7 +325,7 @@ export default function Dashboard() {
           <div>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-bold text-white">Recent Student Cohort</h2>
-              <Link to="/students" className="text-xs text-cyan-400 hover:text-cyan-300 font-medium">
+              <Link to="/students" className="text-xs text-blue-400 hover:text-blue-300 font-medium">
                 View All
               </Link>
             </div>
@@ -337,7 +337,7 @@ export default function Dashboard() {
                 if (student.predictedRisk === 'Medium') badgeClass = 'badge-medium';
 
                 return (
-                  <div key={student.id} className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+                  <div key={student.id} className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
                     <div>
                       <div className="text-xs font-semibold text-slate-200">{student.name}</div>
                       <div className="text-[11px] text-slate-400 font-mono">{student.id} • {student.department}</div>

@@ -55,7 +55,7 @@ export default function Privacy() {
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
+        <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
           <ShieldCheck className="w-4 h-4" />
           <span>Differential Privacy vs Baseline Benchmark</span>
         </div>
@@ -70,7 +70,7 @@ export default function Privacy() {
       {/* Side by Side Model Comparison Components */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Normal Model (Unprotected / Vulnerable) */}
-        <div className="glass-card rounded-2xl p-6 border border-rose-500/20 shadow-card flex flex-col justify-between relative overflow-hidden">
+        <div className="glass-card rounded-2xl p-6 border border-rose-500/20 shadow-sm flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full blur-2xl pointer-events-none" />
 
           <div>
@@ -119,8 +119,8 @@ export default function Privacy() {
         </div>
 
         {/* Protected Model (Differentially Private) */}
-        <div className="glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-card flex flex-col justify-between relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="glass-card rounded-2xl p-6 border border-slate-700 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
 
           <div>
             <div className="flex items-center justify-between mb-4">
@@ -128,7 +128,7 @@ export default function Privacy() {
                 <span className="badge-privacy">Protected Model (PrivaLearn)</span>
                 <h2 className="text-lg font-bold text-white mt-1.5">{protectedModel.type}</h2>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5" />
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Privacy() {
             <div className="space-y-3 divide-y divide-slate-800 text-xs">
               <div className="flex justify-between items-center pt-2">
                 <span className="text-slate-400">Classification Accuracy:</span>
-                <span className="font-mono font-bold text-cyan-300 text-sm">{protectedModel.accuracy}</span>
+                <span className="font-mono font-bold text-blue-300 text-sm">{protectedModel.accuracy}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-slate-400">Precision / Recall:</span>
@@ -144,7 +144,7 @@ export default function Privacy() {
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-slate-400">Privacy Budget (ε, δ):</span>
-                <span className="font-mono text-cyan-300 font-bold">ε = {protectedModel.epsilon}, δ = {protectedModel.delta}</span>
+                <span className="font-mono text-blue-300 font-bold">ε = {protectedModel.epsilon}, δ = {protectedModel.delta}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-slate-400">MIA Vulnerability Rate:</span>
@@ -161,8 +161,8 @@ export default function Privacy() {
             </div>
           </div>
 
-          <div className="mt-6 p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-cyan-200 text-xs flex items-start gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-cyan-400 mt-0.5" />
+          <div className="mt-6 p-3 rounded-xl bg-cyan-950/30 border border-slate-700 text-cyan-200 text-xs flex items-start gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-blue-400 mt-0.5" />
             <span><strong>Mathematically Certified:</strong> Rigorous bounds against individual student re-identification under Rényi DP.</span>
           </div>
         </div>
@@ -222,11 +222,11 @@ export default function Privacy() {
                   <tr key={row.feature} className="hover:bg-slate-800/30">
                     <td className="py-2.5 px-3 font-medium text-slate-200">{row.feature}</td>
                     <td className="py-2.5 px-3 text-center font-mono text-slate-400">{(row.standardWeight * 100).toFixed(0)}%</td>
-                    <td className="py-2.5 px-3 text-center font-mono text-cyan-300 font-semibold">{(row.dpWeight * 100).toFixed(0)}%</td>
+                    <td className="py-2.5 px-3 text-center font-mono text-blue-300 font-semibold">{(row.dpWeight * 100).toFixed(0)}%</td>
                     <td className="py-2.5 px-3 text-right font-mono">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] ${
                         row.sensitivity === 'High' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                        row.sensitivity === 'Medium' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' :
+                        row.sensitivity === 'Medium' ? 'bg-blue-500/10 text-blue-400 border border-cyan-500/20' :
                         'bg-slate-800 text-slate-400'
                       }`}>
                         {row.sensitivity}
@@ -239,7 +239,7 @@ export default function Privacy() {
           </div>
 
           <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-center gap-2">
-            <Lock className="w-4 h-4 text-cyan-400 shrink-0" />
+            <Lock className="w-4 h-4 text-blue-400 shrink-0" />
             <span>DP-SGD preserves key academic predictors while preventing memorization of outliers.</span>
           </div>
         </div>

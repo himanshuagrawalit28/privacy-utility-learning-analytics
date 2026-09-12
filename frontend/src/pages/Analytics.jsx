@@ -67,7 +67,7 @@ export default function Analytics() {
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
+        <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
           <LineChart className="w-4 h-4" />
           <span>Pareto Frontier Analysis</span>
         </div>
@@ -80,7 +80,7 @@ export default function Analytics() {
       </div>
 
       {/* Interactive Epsilon Simulator Box */}
-      <div className="glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-card">
+      <div className="glass-card rounded-2xl p-6 border border-slate-700 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-5">
           <div>
             <span className="badge-privacy">Interactive Simulation</span>
@@ -95,7 +95,7 @@ export default function Analytics() {
           <div className="flex items-center gap-3">
             <div className="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono">
               <span className="text-slate-400">Target: </span>
-              <span className="text-cyan-300 font-bold">ε = {selectedEpsilon}</span>
+              <span className="text-blue-300 font-bold">ε = {selectedEpsilon}</span>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function Analytics() {
         <div className="space-y-2">
           <div className="flex justify-between text-xs text-slate-400 font-mono">
             <span>ε = 0.1 (Max Privacy)</span>
-            <span className="text-cyan-400 font-bold">Recommended Zone (1.0 - 2.0)</span>
+            <span className="text-blue-400 font-bold">Recommended Zone (1.0 - 2.0)</span>
             <span>ε = 10.0 (Minimal Noise)</span>
           </div>
           <input
@@ -120,7 +120,7 @@ export default function Analytics() {
 
         {/* Projected Metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5 pt-5 border-t border-slate-800/80">
-          <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-center">
             <div className="text-xs text-slate-400">Projected Model Accuracy</div>
             <div className="text-2xl font-bold font-display text-indigo-400 mt-1">
               {currentSim.accuracy}%
@@ -128,15 +128,15 @@ export default function Analytics() {
             <div className="text-[10px] text-slate-500 mt-0.5">Retained prediction utility</div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-center">
             <div className="text-xs text-slate-400">Projected Privacy Score</div>
-            <div className="text-2xl font-bold font-display text-cyan-300 mt-1">
+            <div className="text-2xl font-bold font-display text-blue-300 mt-1">
               {currentSim.privacy} / 100
             </div>
             <div className="text-[10px] text-slate-500 mt-0.5">Theoretical anonymity score</div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-center">
+          <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-center">
             <div className="text-xs text-slate-400">MIA Defense Efficacy</div>
             <div className="text-2xl font-bold font-display text-emerald-400 mt-1">
               {currentSim.miaDefense}%
@@ -147,7 +147,7 @@ export default function Analytics() {
       </div>
 
       {/* Main Tradeoff Curve Chart */}
-      <div className="glass-card rounded-2xl p-6 border border-slate-800 shadow-card">
+      <div className="glass-card rounded-2xl p-6 border border-slate-800 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div>
             <h2 className="text-base font-bold text-white">The Accuracy vs. Privacy Frontier</h2>
@@ -218,17 +218,17 @@ export default function Analytics() {
               {tradeoffData.map((row) => {
                 const isSelected = row.epsilon === 1.2;
                 return (
-                  <tr key={row.epsilon} className={`hover:bg-slate-800/30 ${isSelected ? 'bg-cyan-500/10' : ''}`}>
+                  <tr key={row.epsilon} className={`hover:bg-slate-800/30 ${isSelected ? 'bg-blue-500/10' : ''}`}>
                     <td className="py-3 px-4 font-semibold text-slate-200">
                       ε = {row.epsilon}
-                      {isSelected && <span className="ml-2 text-[10px] text-cyan-400 font-sans font-bold">(ACTIVE)</span>}
+                      {isSelected && <span className="ml-2 text-[10px] text-blue-400 font-sans font-bold">(ACTIVE)</span>}
                     </td>
-                    <td className="py-3 px-4 text-center text-indigo-300 font-bold">{row.accuracy}%</td>
-                    <td className="py-3 px-4 text-center text-cyan-300 font-bold">{row.privacyScore}%</td>
+                    <td className="py-3 px-4 text-center text-slate-300 font-bold">{row.accuracy}%</td>
+                    <td className="py-3 px-4 text-center text-blue-300 font-bold">{row.privacyScore}%</td>
                     <td className="py-3 px-4 text-center text-emerald-400 font-semibold">{row.attackSuccess}%</td>
                     <td className="py-3 px-4 text-right">
                       <span className={`px-2.5 py-0.5 rounded-full text-[10px] ${
-                        isSelected ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40' :
+                        isSelected ? 'bg-cyan-500/20 text-blue-300 border border-cyan-500/40' :
                         row.epsilon >= 8.0 ? 'bg-rose-500/10 text-rose-400' :
                         'bg-slate-800 text-slate-400'
                       }`}>

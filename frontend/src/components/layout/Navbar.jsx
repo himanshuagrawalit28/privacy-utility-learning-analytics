@@ -69,8 +69,8 @@ export default function Navbar({ onToggleSidebar }) {
       {/* Right Section: Privacy Status, Mode badge, Notifications, Profile */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Differential Privacy Live Indicator */}
-        <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-medium">
-          <Shield className="w-3.5 h-3.5 text-cyan-400 animate-pulse-subtle" />
+        <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-slate-700 text-blue-300 text-xs font-medium">
+          <Shield className="w-3.5 h-3.5 text-blue-400 animate-pulse-subtle" />
           <span>DP-SGD Active:</span>
           <span className="font-mono bg-cyan-900/50 px-1.5 py-0.5 rounded text-cyan-200">ε = 1.25</span>
         </div>
@@ -87,7 +87,7 @@ export default function Navbar({ onToggleSidebar }) {
         {/* Quick Predict Action */}
         <button
           onClick={() => navigate('/prediction')}
-          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-semibold transition btn-press"
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-500/10 hover:bg-cyan-500/20 border border-slate-700 text-blue-300 text-xs font-semibold transition btn-press"
           title="Run Individual Student Prediction"
         >
           <Sparkles className="w-3.5 h-3.5" />
@@ -110,7 +110,7 @@ export default function Navbar({ onToggleSidebar }) {
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             className="flex items-center gap-2.5 p-1.5 rounded-xl hover:bg-slate-800/80 transition text-left btn-press"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-xs ring-1 ring-white/20 shadow-glow-cyan">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-semibold text-xs ring-1 ring-white/20 shadow-none">
               EV
             </div>
             <div className="hidden lg:block">
@@ -121,7 +121,7 @@ export default function Navbar({ onToggleSidebar }) {
 
           {showProfileMenu && (
             <div 
-              className="absolute right-0 mt-2 w-56 glass-card rounded-xl shadow-card border border-slate-700/80 py-1.5 z-50 animate-slide-up"
+              className="absolute right-0 mt-2 w-56 glass-card rounded-xl shadow-sm border border-slate-700/80 py-1.5 z-50 animate-slide-up"
               onMouseLeave={() => setShowProfileMenu(false)}
             >
               <div className="px-4 py-2 border-b border-slate-800">

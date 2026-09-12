@@ -27,7 +27,7 @@ export const ToastProvider = ({ children }) => {
         {toasts.map((toast) => {
           let bg = 'bg-slate-900 border-slate-700 text-slate-100';
           let Icon = Info;
-          let iconColor = 'text-cyan-400';
+          let iconColor = 'text-blue-400';
 
           if (toast.type === 'success') {
             bg = 'bg-slate-900/95 border-emerald-500/30 text-emerald-100 shadow-lg shadow-emerald-950/40';

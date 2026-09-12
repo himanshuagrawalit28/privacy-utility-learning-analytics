@@ -61,7 +61,7 @@ export default function Prediction() {
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
+        <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
           <Sparkles className="w-4 h-4" />
           <span>Interactive Student Risk Predictor</span>
         </div>
@@ -98,7 +98,7 @@ export default function Prediction() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Form Column */}
-        <div className="lg:col-span-7 glass-card rounded-2xl p-6 border border-slate-800 shadow-card">
+        <div className="lg:col-span-7 glass-card rounded-2xl p-6 border border-slate-800 shadow-sm">
           <form onSubmit={handleCalculate} className="space-y-5">
             <h2 className="text-base font-bold text-white flex items-center justify-between">
               <span>Input Student Features</span>
@@ -109,7 +109,7 @@ export default function Prediction() {
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
                 <label className="font-semibold text-slate-300">Class Attendance Rate</label>
-                <span className="font-mono text-cyan-400 font-bold">{formData.attendance}%</span>
+                <span className="font-mono text-blue-400 font-bold">{formData.attendance}%</span>
               </div>
               <input
                 type="range"
@@ -178,7 +178,7 @@ export default function Prediction() {
             <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                  <ShieldCheck className="w-4 h-4 text-blue-400" />
                   <span className="text-xs font-semibold text-slate-200">
                     Apply Differential Privacy Perturbation
                   </span>
@@ -196,7 +196,7 @@ export default function Prediction() {
                 <div className="pt-2 border-t border-slate-800">
                   <div className="flex justify-between items-center text-xs mb-1">
                     <span className="text-slate-400">Privacy Budget (ε)</span>
-                    <span className="font-mono text-cyan-300 font-bold">ε = {formData.epsilon}</span>
+                    <span className="font-mono text-blue-300 font-bold">ε = {formData.epsilon}</span>
                   </div>
                   <input
                     type="range"
@@ -220,7 +220,7 @@ export default function Prediction() {
             <button
               type="submit"
               disabled={isCalculating}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-sm shadow-glow-cyan transition flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-slate-950 font-bold text-sm shadow-none transition flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isCalculating ? (
                 <>
@@ -239,7 +239,7 @@ export default function Prediction() {
 
         {/* Prediction Results Display */}
         <div className="lg:col-span-5 flex flex-col gap-4">
-          <div className="glass-card rounded-2xl p-6 border border-slate-800 shadow-card flex-1 flex flex-col justify-between">
+          <div className="glass-card rounded-2xl p-6 border border-slate-800 shadow-sm flex-1 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-bold text-white">Prediction Outcome</h2>
@@ -249,7 +249,7 @@ export default function Prediction() {
               {result ? (
                 <div className="space-y-5 animate-fade-in">
                   {/* Category Badge */}
-                  <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 text-center">
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 text-center">
                     <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">
                       Predicted Academic Risk
                     </span>
@@ -286,13 +286,13 @@ export default function Prediction() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Injected DP Noise:</span>
-                      <span className={result.noiseApplied >= 0 ? 'text-cyan-400' : 'text-amber-400'}>
+                      <span className={result.noiseApplied >= 0 ? 'text-blue-400' : 'text-amber-400'}>
                         {result.noiseApplied >= 0 ? `+${(result.noiseApplied * 100).toFixed(2)}%` : `${(result.noiseApplied * 100).toFixed(2)}%`}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Privacy Bound:</span>
-                      <span className="text-cyan-300">{result.privacyGuarantee}</span>
+                      <span className="text-blue-300">{result.privacyGuarantee}</span>
                     </div>
                   </div>
                 </div>
@@ -307,7 +307,7 @@ export default function Prediction() {
             </div>
 
             <div className="p-3 mt-4 rounded-xl bg-cyan-950/20 border border-cyan-500/20 text-[11px] text-slate-400 flex items-start gap-2">
-              <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+              <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
               <span>
                 Outputs with DP perturbation prevent adversaries from reverse-engineering attendance patterns from confidence score deltas.
               </span>

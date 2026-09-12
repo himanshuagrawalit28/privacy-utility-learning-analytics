@@ -6,7 +6,7 @@ export default function PlaceholderCard({ title, path, description, icon: Icon =
     <div className="space-y-6">
       {/* Route Header */}
       <div>
-        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
+        <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
           <Icon className="w-4 h-4" />
           <span>Route: {path}</span>
         </div>
@@ -20,11 +20,11 @@ export default function PlaceholderCard({ title, path, description, icon: Icon =
 
       {/* Placeholder Body Wireframe */}
       <div className="glass-card rounded-2xl p-8 border border-dashed border-slate-700 text-center flex flex-col items-center justify-center min-h-[350px] gap-4">
-        <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyan-400 shadow-glow-cyan">
+        <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-blue-400 shadow-none">
           <Icon className="w-7 h-7" />
         </div>
         <div>
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 mb-2">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyan-950/60 text-blue-300 border border-slate-700 mb-2">
             Phase 1 Placeholder
           </span>
           <h2 className="text-lg font-bold text-white">

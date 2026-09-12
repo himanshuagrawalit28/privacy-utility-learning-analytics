@@ -69,7 +69,7 @@ export default function Students() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider mb-1">
             <Users className="w-4 h-4" />
             <span>Differential Privacy Student Cohort</span>
           </div>
@@ -152,7 +152,7 @@ export default function Students() {
       </div>
 
       {/* Student Table */}
-      <div className="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-card">
+      <div className="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
         {loading ? (
           <div className="py-16">
             <LoadingSpinner text="Fetching student records from API with DP guarantees..." />
@@ -163,7 +163,7 @@ export default function Students() {
             {hasActiveFilters && (
               <button
                 onClick={handleClearFilters}
-                className="text-xs text-cyan-400 hover:underline"
+                className="text-xs text-blue-400 hover:underline"
               >
                 Clear all filters
               </button>
@@ -197,7 +197,7 @@ export default function Students() {
                       className="hover:bg-slate-800/40 transition-colors duration-150 group"
                     >
                       <td className="py-3.5 px-4">
-                        <div className="font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors">
+                        <div className="font-semibold text-slate-200 group-hover:text-blue-300 transition-colors">
                           {student.name}
                         </div>
                         <div className="text-xs text-slate-500 font-mono">{student.id}</div>
@@ -223,14 +223,14 @@ export default function Students() {
                         <span className={badge}>{student.predictedRisk}</span>
                       </td>
                       <td className="py-3.5 px-4 text-center">
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/60 text-cyan-300 border border-cyan-500/20">
+                        <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/60 text-blue-300 border border-cyan-500/20">
                           {student.dpPerturbation || '±0.02 (DP)'}
                         </span>
                       </td>
                       <td className="py-3.5 px-4 text-right">
                         <button
                           onClick={() => setSelectedStudent(student)}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-300 hover:bg-slate-800 transition btn-press"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-blue-300 hover:bg-slate-800 transition btn-press"
                           title="Inspect Privacy Perturbation Details"
                         >
                           <Eye className="w-4 h-4" />
@@ -284,7 +284,7 @@ export default function Students() {
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-blue-400 flex items-center justify-center font-bold">
                 {selectedStudent.name.charAt(0)}
               </div>
               <div>
@@ -294,14 +294,14 @@ export default function Students() {
             </div>
 
             <div className="space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+              <div className="grid grid-cols-2 gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
                 <div>
                   <span className="text-slate-400">Department</span>
                   <div className="text-slate-200 font-semibold mt-0.5">{selectedStudent.department}</div>
                 </div>
                 <div>
                   <span className="text-slate-400">Risk Assessment</span>
-                  <div className="font-semibold mt-0.5 text-cyan-300">{selectedStudent.predictedRisk} Risk</div>
+                  <div className="font-semibold mt-0.5 text-blue-300">{selectedStudent.predictedRisk} Risk</div>
                 </div>
                 <div>
                   <span className="text-slate-400">Attendance Rate</span>
@@ -314,8 +314,8 @@ export default function Students() {
               </div>
 
               {/* Differential Privacy Mask details */}
-              <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 space-y-2">
-                <div className="flex items-center gap-1.5 text-cyan-300 font-semibold">
+              <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-slate-700 space-y-2">
+                <div className="flex items-center gap-1.5 text-blue-300 font-semibold">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Differential Privacy Verification</span>
                 </div>
@@ -324,7 +324,7 @@ export default function Students() {
                 </p>
                 <div className="flex items-center justify-between text-[11px] font-mono pt-1 text-slate-300">
                   <span>Injected Noise Perturbation:</span>
-                  <span className="text-cyan-400 font-bold">{selectedStudent.dpPerturbation}</span>
+                  <span className="text-blue-400 font-bold">{selectedStudent.dpPerturbation}</span>
                 </div>
               </div>
             </div>
