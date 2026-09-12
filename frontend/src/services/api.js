@@ -10,7 +10,7 @@ import {
 // API Client Configuration
 const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE_URL) || 'http://localhost:5000/api';
 // Default to mock mode if backend is not running or explicitly set
-const FORCE_MOCK = false;
+const FORCE_MOCK = true;
 
 // Safe storage helper for SSR / test environments
 const storage = {
@@ -148,54 +148,7 @@ export const studentsAPI = {
 
 export const predictionAPI = {
   predictRisk: async (features) => {
-    if (FORCE_MOCK) {
-      await delay(500);
-      const attendance = parseFloat(features.attendance) || 80;
-      const midterm = parseFloat(features.midtermScore) || 75;
-      const studyHours = parseFloat(features.studyHours) || 12;
-      const absences = parseFloat(features.absences) || 2;
-      const epsilon = parseFloat(features.epsilon) || 1.25;
-      const dpEnabled = features.enableDP !== false;
-
-      // Calibrated academic risk calculation
-      const attRisk = (100 - attendance) / 100;
-      const scoreRisk = (100 - midterm) / 100;
-      const absenceRisk = Math.min(absences / 12, 1.0);
-      const studyBonus = Math.min(studyHours / 25, 1.0);
-
-      const rawRisk = (attRisk * 0.45) + (scoreRisk * 0.35) + (absenceRisk * 0.30) - (studyBonus * 0.15);
-      const normalizedBaseRisk = Math.min(Math.max(rawRisk, 0.02), 0.98);
-
-      // Differential Privacy Gaussian/Laplace Perturbation simulation:
-      // Noise inversely proportional to epsilon
-      let noise = 0;
-      if (dpEnabled && epsilon > 0) {
-        const scale = 0.08 / epsilon;
-        noise = (Math.random() - 0.5) * scale;
-      }
-
-      const finalScore = Math.min(Math.max(normalizedBaseRisk + noise, 0.01), 0.99);
-      let riskCategory = 'Low';
-      if (finalScore >= 0.65) riskCategory = 'High';
-      else if (finalScore >= 0.35) riskCategory = 'Medium';
-
-      return {
-        success: true,
-        data: {
-          riskScore: parseFloat(finalScore.toFixed(3)),
-          rawScore: parseFloat(normalizedBaseRisk.toFixed(3)),
-          noiseApplied: parseFloat(noise.toFixed(4)),
-          predictedRisk: riskCategory,
-          privacyGuarantee: dpEnabled ? `(ε = ${epsilon}, δ = 1e-5)` : 'Unprotected (ε = ∞)',
-          confidenceInterval: [
-            parseFloat(Math.max(0, finalScore - 0.06).toFixed(2)),
-            parseFloat(Math.min(1, finalScore + 0.06).toFixed(2))
-          ],
-          timestamp: new Date().toISOString()
-        }
-      };
-    }
-
+    // ALWAYS send predictions to the real Python ML-Service!
     const res = await apiClient.post('/predict', features);
     return res.data;
   }
