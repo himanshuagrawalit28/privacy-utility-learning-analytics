@@ -60,7 +60,7 @@ export default function Attack() {
         <h1 className="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight">
           Membership Attack Visualization
         </h1>
-        <p className="text-slate-500 text-sm mt-0.5 max-w-3xl">
+        <p className="text-slate-400 text-sm mt-0.5 max-w-3xl">
           Visualizing adversary capability to identify training cohort members. Side-by-side metrics demonstrate how DP-SGD slashes attack AUC from 0.86 to 0.53 (near random baseline).
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function Attack() {
       {/* Side-by-Side Model Attack Resilience Comparison */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Normal Model Under Attack */}
-        <div className="glass-card rounded-2xl p-6 border border-rose-500/20 shadow-md flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 border border-rose-500/20 shadow-card flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -82,19 +82,19 @@ export default function Attack() {
 
             <div className="space-y-3 divide-y divide-slate-800 text-xs">
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Adversary AUC:</span>
+                <span className="text-slate-400">Adversary AUC:</span>
                 <span className="font-mono font-bold text-rose-400 text-sm">{data.stats.unprotectedAuc}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Attack Accuracy:</span>
+                <span className="text-slate-400">Attack Accuracy:</span>
                 <span className="font-mono text-rose-400 font-bold">78.4%</span>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Confidence Separation:</span>
+                <span className="text-slate-400">Confidence Separation:</span>
                 <span className="font-mono text-rose-300">Stark divergence between members and test set</span>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Student Re-identification:</span>
+                <span className="text-slate-400">Student Re-identification:</span>
                 <span className="font-mono text-rose-400 font-semibold">High Risk</span>
               </div>
             </div>
@@ -107,40 +107,40 @@ export default function Attack() {
         </div>
 
         {/* Protected Model Under Attack */}
-        <div className="glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-md flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-card flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
                 <span className="badge-privacy">Protected Model (DP-SGD)</span>
                 <h2 className="text-lg font-bold text-white mt-1">Negligible MIA Vulnerability</h2>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold">
                 <ShieldCheck className="w-5 h-5" />
               </div>
             </div>
 
             <div className="space-y-3 divide-y divide-slate-800 text-xs">
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Adversary AUC:</span>
+                <span className="text-slate-400">Adversary AUC:</span>
                 <span className="font-mono font-bold text-emerald-400 text-sm">{data.stats.protectedAuc}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Attack Accuracy:</span>
+                <span className="text-slate-400">Attack Accuracy:</span>
                 <span className="font-mono text-emerald-400 font-bold">{data.stats.attackSuccessMember}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Leakage Reduction:</span>
-                <span className="font-mono text-blue-700 font-bold">{data.stats.leakageReductionPercent}</span>
+                <span className="text-slate-400">Leakage Reduction:</span>
+                <span className="font-mono text-cyan-300 font-bold">{data.stats.leakageReductionPercent}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <span className="text-slate-500">Student Re-identification:</span>
+                <span className="text-slate-400">Student Re-identification:</span>
                 <span className="font-mono text-emerald-400 font-semibold">{data.stats.vulnerabilityLevel}</span>
               </div>
             </div>
           </div>
 
           <div className="mt-5 p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-cyan-200 text-xs flex items-start gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-blue-600 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-cyan-400 mt-0.5" />
             <span>Differential privacy noise ensures member outputs are indistinguishable from non-members.</span>
           </div>
         </div>
@@ -149,13 +149,13 @@ export default function Attack() {
       {/* ROC Curves & Confidence Distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ROC Curves */}
-        <div className="glass-card rounded-2xl p-6 border border-slate-200 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
               <h2 className="text-base font-bold text-white">Receiver Operating Characteristic (ROC)</h2>
               <span className="badge-privacy">Adversary ROC</span>
             </div>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400">
               True Positive Rate vs False Positive Rate for member identification.
             </p>
           </div>
@@ -203,19 +203,19 @@ export default function Attack() {
             </ResponsiveContainer>
           </div>
 
-          <div className="p-3 rounded-xl bg-white border border-slate-200 text-[11px] text-slate-600">
+          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
             <strong>ROC Analysis:</strong> The DP-SGD curve hugs the random guessing diagonal, proving that an attacker cannot reliably classify training members.
           </div>
         </div>
 
         {/* Prediction Confidence Overlap Histogram */}
-        <div className="glass-card rounded-2xl p-6 border border-slate-200 flex flex-col justify-between">
+        <div className="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-1">
               <h2 className="text-base font-bold text-white">Member vs Non-Member Score Overlap</h2>
               <span className="badge-model">Distribution</span>
             </div>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400">
               Confidence score alignment between training cohort (Members) and unseen cohort (Non-Members).
             </p>
           </div>
@@ -234,7 +234,7 @@ export default function Attack() {
             </ResponsiveContainer>
           </div>
 
-          <div className="p-3 rounded-xl bg-white border border-slate-200 text-[11px] text-slate-600">
+          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
             <strong>Distribution Overlap:</strong> In the DP-protected model, member confidence distribution mirrors non-members with nearly identical variance.
           </div>
         </div>
