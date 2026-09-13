@@ -8,7 +8,7 @@ export default function MainLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       {/* Sidebar Navigation */}
       <Sidebar 
         isOpen={isSidebarOpen} 
@@ -21,22 +21,22 @@ export default function MainLayout() {
         <Navbar onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         {/* Dynamic Page Container */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto animate-fade-in">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 xl:px-12 max-w-[1600px] w-full mx-auto animate-fade-in">
           <Outlet />
         </main>
 
         {/* Global Footer */}
-        <footer className="mt-auto border-t border-slate-800/80 bg-slate-900/60 py-4 px-6 text-xs text-slate-400">
+        <footer className="mt-auto border-t border-slate-200 bg-white py-4 px-6 text-xs text-slate-500">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-blue-400" />
+              <ShieldCheck className="w-4 h-4 text-blue-600" />
               <span>
                 <strong>PrivaLearn AI</strong> — Privacy-Preserving Student Risk Intelligence with Differential Privacy (DP-SGD).
               </span>
             </div>
             <div className="flex items-center gap-4 text-[11px] font-mono">
-              <span className="text-emerald-400">● FERPA & GDPR Compliant</span>
-              <span className="text-slate-500">v1.0.4-rc</span>
+              <span className="text-emerald-600">● FERPA & GDPR Compliant</span>
+              <span className="text-slate-400">v1.0.4-rc</span>
             </div>
           </div>
         </footer>

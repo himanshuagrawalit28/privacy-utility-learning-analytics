@@ -14,11 +14,9 @@ import {
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { name: 'Student Records', path: '/students', icon: Users, badge: '50+' },
   { name: 'Risk Predictor', path: '/prediction', icon: Sparkles, highlight: true },
   { name: 'Privacy Benchmark', path: '/privacy', icon: ShieldCheck },
   { name: 'Attack Visualizer', path: '/attack', icon: ShieldAlert, badge: 'MIA' },
-  { name: 'Tradeoff Analytics', path: '/analytics', icon: LineChart },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -36,21 +34,21 @@ export default function Sidebar({ isOpen, onClose }) {
 
       {/* Sidebar Container */}
       <aside 
-        className={`fixed top-0 bottom-0 left-0 z-40 w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-800/80">
+        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-none">
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm">
               <Lock className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-base font-bold font-display tracking-tight bg-gradient-to-r from-white via-slate-100 to-cyan-400 bg-clip-text text-transparent">
+              <div className="text-base font-bold font-display tracking-tight text-slate-800">
                 PrivaLearn AI
               </div>
-              <div className="text-[10px] text-blue-400 font-mono tracking-wider uppercase font-semibold">
+              <div className="text-[10px] text-blue-600 font-mono tracking-wider uppercase font-semibold">
                 Privacy ML Engine
               </div>
             </div>
@@ -58,7 +56,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
           <button
             onClick={onClose}
-            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -82,14 +80,14 @@ export default function Sidebar({ isOpen, onClose }) {
                 className={({ isActive }) => `
                   group relative flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
                   ${isActive 
-                    ? 'bg-gradient-to-r from-blue-600/15 to-indigo-500/10 text-blue-300 border border-slate-700 shadow-sm' 
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/60'
+                    ? 'bg-indigo-50/80 text-indigo-700 shadow-sm border-l-4 border-indigo-600 rounded-l-md' 
+                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                   }
                 `}
               >
                 <div className="flex items-center gap-3">
                   <Icon className={`w-4 h-4 transition-colors ${
-                    isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-slate-200'
+                    isActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-slate-600'
                   }`} />
                   <span>{item.name}</span>
                 </div>
@@ -97,14 +95,14 @@ export default function Sidebar({ isOpen, onClose }) {
                 {item.badge && (
                   <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold ${
                     isActive 
-                      ? 'bg-cyan-500/20 text-blue-300 border border-slate-700' 
-                      : 'bg-slate-800 text-slate-400'
+                      ? 'bg-indigo-100 text-indigo-700' 
+                      : 'bg-slate-100 text-slate-500'
                   }`}>
                     {item.badge}
                   </span>
                 )}
                 {item.highlight && !item.badge && (
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
                 )}
               </NavLink>
             );
@@ -112,24 +110,24 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* DP Budget Mini Card */}
-        <div className="p-4 border-t border-slate-800/80 bg-slate-900/40 m-3 rounded-2xl border">
+        <div className="p-4 bg-slate-50 m-3 rounded-2xl border border-slate-200">
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-              <Cpu className="w-3.5 h-3.5 text-blue-400" />
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-600">
+              <Cpu className="w-3.5 h-3.5 text-indigo-600" />
               <span>DP Budget Consumed</span>
             </div>
-            <span className="text-[11px] font-mono text-blue-400 font-semibold">12.5%</span>
+            <span className="text-[11px] font-mono text-indigo-600 font-semibold">12.5%</span>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden mb-2">
+          <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden mb-2">
             <div 
-              className="bg-gradient-to-r from-cyan-400 to-indigo-500 h-full rounded-full transition-all duration-500" 
+              className="bg-indigo-600 h-full rounded-full transition-all duration-500" 
               style={{ width: '12.5%' }}
             />
           </div>
 
-          <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono">
             <span>Spent: ε = 1.25</span>
             <span>Limit: ε = 10.0</span>
           </div>
